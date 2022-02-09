@@ -1,0 +1,6 @@
+.container-narrow {
+    max-width: 40rem;
+}
+.container-wide {
+    max-width: 60rem;
+}

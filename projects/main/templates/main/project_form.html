@@ -1,15 +1,21 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n django_bootstrap5 %}
 
 {% block title %}
     {% translate "Create new project" %} &middot; {{ block.super }}
 {% endblock %}
 
 {% block content %}
-    <form>
+    <form method="POST" class="container container-narrow">
         {% csrf_token %}
-        {{ form.as_p }}
-        <a href="{% url "list" %}">{% translate "Cancel" %}</a>
-        <button>{% translate "Submit" %}</button>
+        {% bootstrap_field form.title %}
+        {% bootstrap_field form.responsible_researcher %}
+        {% bootstrap_field form.department %}
+        {% bootstrap_field form.data_type %}
+        {% bootstrap_field form.identifier %}
+        <div class="mb-3">
+            <a href="{% url "list" %}" class="btn btn-link">{% translate "Cancel" %}</a>
+            <button class="btn btn-primary">{% translate "Submit" %}</button>
+        </div>
     </form>
 {% endblock %}
