@@ -21,3 +21,4 @@ class ProjectCreateView(CreateView):
 
 class ProjectListView(ListView):
     model = Project
+    paginate_by = 20

@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load i18n %}
+{% load i18n django_bootstrap5 %}
 
 {% block content %}
     <div class="container container-wide">
@@ -30,5 +30,9 @@
                 {% endfor %}
             </tbody>
         </table>
+
+        {% if is_paginated %}
+            {% bootstrap_pagination page_obj url=request.get_full_path %}
+        {% endif %}
     </div>
 {% endblock %}
