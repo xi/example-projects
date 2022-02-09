@@ -3,7 +3,11 @@
 
 {% block content %}
     <div class="container container-wide">
-        <div class="text-end mb-3">
+        <div class="d-flex justify-content-between mb-3">
+            <label>
+                <span class="visually-hidden">{% translate "Filter" %}</span>
+                <input class="form-control">
+            </label>
             <a href="{% url 'create' %}" class="btn btn-secondary">{% translate "Create new project" %}</a>
         </div>
         <table class="table">
@@ -19,7 +23,7 @@
             </thead>
             <tbody>
                 {% for project in object_list %}
-                    <tr>
+                    <tr data-filter="{{ project.title|lower }} {{ project.department|lower }} {{ project.data_type.all|join:" "|lower }}">
                         <td>{{ project.id }}</td>
                         <td>{{ project.title }}</td>
                         <td>{{ project.responsible_researcher }}</td>
