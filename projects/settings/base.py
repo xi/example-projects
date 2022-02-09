@@ -124,3 +124,7 @@ NPM_FILE_PATTERNS = {
 BOOTSTRAP5 = {
     'set_placeholder': False,
 }
+
+# free is limited to 100 requests per 5 minutes
+# https://www.semanticscholar.org/product/api
+SEMANTICSCHOLAR_API_KEY = None

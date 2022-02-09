@@ -1,12 +1,36 @@
+import requests
 from django import forms
 from django.core.exceptions import SuspiciousOperation
 from django.views.generic import CreateView
 from django.views.generic import ListView
 from django.urls import reverse
+from django.utils.translation import gettext_lazy as _
 
+from .helpers import update_paper
 from .models import Department
 from .models import DataType
 from .models import Project
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = [
+            'title',
+            'responsible_researcher',
+            'department',
+            'data_type',
+            'paper_identifier',
+        ]
+
+    def clean_paper_identifier(self):
+        identifier = self.cleaned_data['paper_identifier']
+        if identifier:
+            try:
+                update_paper(self.instance, identifier)
+            except requests.RequestException:
+                raise forms.ValidationError(_('Invalid identifier'))
+        return identifier
 
 
 class FilterForm(forms.Form):
@@ -20,13 +44,7 @@ class FilterForm(forms.Form):
 
 class ProjectCreateView(CreateView):
     model = Project
-    fields = [
-        'title',
-        'responsible_researcher',
-        'department',
-        'data_type',
-        'identifier',
-    ]
+    form_class = ProjectForm
 
     def get_success_url(self):
         return reverse('list')

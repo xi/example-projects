@@ -17,13 +17,23 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         departments = list(Department.objects.all())
         data_types = list(DataType.objects.all())
-        projects = []
+        identifiers = [
+            '10.1038/nrn3241',
+            'arXiv:1705.10311',
+            'MAG:112218234',
+            'ACL:W12-3903',
+            'PMID:19872477',
+            'CorpusID:37220927',
+            '',
+        ]
 
+        projects = []
         for _ in range(20_000):
             projects.append(Project(
                 title=' '.join(fake.words(3)),
                 responsible_researcher=fake.name(),
                 department=random.choice(departments),
+                paper_identifier=random.choice(identifiers),
             ))
         Project.objects.bulk_create(projects)
 

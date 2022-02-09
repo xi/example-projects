@@ -28,7 +28,8 @@
                     <th>{% translate "Responsible researcher" %}</th>
                     <th>{% translate "Department" %}</th>
                     <th>{% translate "Data type" %}</th>
-                    <th>{% translate "Identifier" %}</th>
+                    <th>{% translate "Paper" %}</th>
+                    <th>{% translate "Citations" %}</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +40,15 @@
                         <td>{{ project.responsible_researcher }}</td>
                         <td>{{ project.department }}</td>
                         <td>{{ project.data_type.all|join:", " }}</td>
-                        <td>{{ project.identifier|default:"—" }}</td>
+                        {% with project.get_paper as paper %}
+                            {% if paper.title %}
+                                <td><a href="{{ paper.url }}">{{ paper.title }}</a></td>
+                                <td>{{ paper.citations }}</td>
+                            {% else %}
+                                <td>&mdash;</td>
+                                <td>&mdash;</td>
+                            {% endif %}
+                        {% endwith %}
                     </tr>
                 {% endfor %}
             </tbody>
