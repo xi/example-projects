@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {% translate "Create new project" %} &middot; {{ block.super }}
+{% endblock %}
+
+{% block content %}
+    <form>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <a href="{% url "list" %}">{% translate "Cancel" %}</a>
+        <button>{% translate "Submit" %}</button>
+    </form>
+{% endblock %}

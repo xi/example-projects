@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+    <a href="{% url 'create' %}">{% translate "Create new project" %}</a>
+    <table>
+        <thead>
+            <tr>
+                <th>{% translate "ID" %}</th>
+                <th>{% translate "Title" %}</th>
+                <th>{% translate "Responsible researcher" %}</th>
+                <th>{% translate "Department" %}</th>
+                <th>{% translate "Data type" %}</th>
+                <th>{% translate "Identifier" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in object_list %}
+                <tr>
+                    <td>{{ project.id }}</td>
+                    <td>{{ project.title }}</td>
+                    <td>{{ project.responsible_researcher }}</td>
+                    <td>{{ project.department }}</td>
+                    <td>{{ project.data_type.all|join:", " }}</td>
+                    <td>{{ project.identifier|default:"—" }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
