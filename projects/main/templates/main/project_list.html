@@ -3,9 +3,23 @@
 
 {% block content %}
     <div class="container container-wide">
-        <div class="text-end mb-3">
+        <div class="text-end align-items-end mb-4">
             <a href="{% url 'create' %}" class="btn btn-secondary">{% translate "Create new project" %}</a>
         </div>
+
+        <form class="row g-2 mb-4">
+            <div class="col-md">
+                {% bootstrap_field filter_form.department wrapper_class="" show_label=False %}
+            </div>
+            <div class="col-md">
+                {% bootstrap_field filter_form.data_type wrapper_class="" show_label=False %}
+            </div>
+            <div class="col-md flex-grow-0 text-nowrap">
+                <button class="btn btn-primary">{% translate 'Filter' %}</button>
+                <a href="?" class="btn btn-secondary">{% translate 'Reset' %}</a>
+            </div>
+        </form>
+
         <table class="table">
             <thead>
                 <tr>
