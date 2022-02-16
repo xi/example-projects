@@ -14,3 +14,4 @@ install:
 	npm install bootstrap@^5.0.0
 	$(VIRTUAL_ENV)/bin/python manage.py migrate
 	$(VIRTUAL_ENV)/bin/python manage.py loaddata data.json
+	$(VIRTUAL_ENV)/bin/python manage.py populate

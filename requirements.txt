@@ -3,3 +3,4 @@ django-bootstrap5==21.3
 django-npm==1.0.0
 Faker==12.1.0
 requests==2.27.1
+model-bakery==1.4.0
